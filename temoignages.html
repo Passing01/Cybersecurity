@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="fr">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signalement des Sites Malveillants</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- CSS personnalisé -->
+    <style>
+        body {
+            background-color: #f3f3f3;
+            font-family: 'Poppins', sans-serif;
+        }
+        .navbar {
+            background-color: #1e293b;
+        }
+        .navbar-brand {
+            color: #f8fafc;
+            font-size: 1.8rem;
+        }
+        .navbar-nav .nav-link {
+            color: #cbd5e1;
+            margin-right: 20px;
+        }
+        .navbar-nav .nav-link:hover {
+            color: #ffffff;
+        }
+        .hero {
+            background: linear-gradient(135deg, #007bff, #6610f2);
+            color: #ffffff;
+            padding: 50px 20px;
+            text-align: center;
+        }
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+        }
+        .hero p {
+            font-size: 1.2rem;
+        }
+        .section-title {
+            text-align: center;
+            margin: 30px 0;
+            color: #343a40;
+        }
+        .card {
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        .btn-custom {
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 20px;
+            padding: 10px 20px;
+            font-weight: bold;
+        }
+        .btn-custom:hover {
+            background-color: #0056b3;
+        }
+        .tab-content {
+            margin-top: 20px;
+        }
+        .comment-section {
+            margin-top: 20px;
+        }
+        .comment {
+            background-color: #f8f9fa;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+        .comment .author {
+            font-weight: bold;
+        }
+        /* Formulaire de commentaire à droite */
+        .comment-form {
+            margin-top: 10px;
+        }
+        /* Image de fond sous l'entête, mais au-dessous du texte des onglets */
+        .background-section {
+            background-image: url('https://example.com/votre-image.jpg'); /* Remplacez l'URL par le chemin de votre image */
+            background-size: cover;
+            background-position: center;
+            height: 400px; /* Ajustez la hauteur selon vos préférences */
+            margin-top: 40px; /* Espacement sous les onglets */
+        }
+        /* Style des cadres dans l'onglet Mesures de Prévention */
+        .prevention-step {
+            background-color: #ffffff;
+            border: 2px solid #007bff;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .prevention-step img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+        .prevention-step h4 {
+            color: #007bff;
+            margin-bottom: 10px;
+        }
+        .prevention-step p {
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">CyberSecure</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="#">Accueil</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+    <h1>Protégez-vous contre les cybermenaces</h1>
+    <p>Partagez vos expériences, signalez des sites malveillants et apprenez les bonnes pratiques de cybersécurité.</p>
+</section>
+
+<!-- Onglets -->
+<div class="container mt-5">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <!-- Onglet Détails des Sites Signalés en première position -->
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="details-tab" data-bs-toggle="tab" data-bs-target="#details" type="button" role="tab" aria-controls="details" aria-selected="true">
+                Détails des Sites Signalés
+            </button>
+        </li>
+        <!-- Onglet Signalez un Site Malveillant -->
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="signalement-tab" data-bs-toggle="tab" data-bs-target="#signalement" type="button" role="tab" aria-controls="signalement" aria-selected="false">
+                Signalez un Site Malveillant
+            </button>
+        </li>
+        <!-- Onglet Mesures de Prévention -->
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="prevention-tab" data-bs-toggle="tab" data-bs-target="#prevention" type="button" role="tab" aria-controls="prevention" aria-selected="false">
+                Mesures de Prévention
+            </button>
+        </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+        <!-- Onglet Détails -->
+        <div class="tab-pane fade show active" id="details" role="tabpanel" aria-labelledby="details-tab">
+            <h2 class="section-title">Détails des Sites Signalés</h2>
+            <div class="row">
+                <!-- Exemple de carte de site malveillant -->
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-header bg-danger text-white">example.com</div>
+                        <div class="card-body">
+                            <p><strong>URL :</strong> <a href="https://example.com" target="_blank">example.com</a></p>
+                            <p><strong>Description :</strong> Phishing détecté via des emails frauduleux.</p>
+                            <p><strong>Date :</strong> 21/11/2024</p>
+                        </div>
+                    </div>
+
+                    <!-- Section des commentaires -->
+                    <div class="comment-section">
+                        <h5>Commentaires :</h5>
+                        <div class="comment">
+                            <p class="author">Utilisateur 1 :</p>
+                            <p>Ce site est clairement malveillant, je vous conseille de l'éviter.</p>
+                        </div>
+                        <div class="comment">
+                            <p class="author">Utilisateur 2 :</p>
+                            <p>Merci pour l'alerte, je vais éviter ce site.</p>
+                        </div>
+
+                        <!-- Formulaire d'ajout de commentaire -->
+                        <h5>Ajouter un commentaire :</h5>
+                        <form class="comment-form" id="commentForm1">
+                            <div class="mb-3">
+                                <textarea class="form-control" rows="3" id="newComment1" placeholder="Écrivez un commentaire"></textarea>
+                            </div>
+                            <button type="button" id="submitComment1" class="btn btn-sm btn-custom">Soumettre</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Onglet Signalement -->
+        <div class="tab-pane fade" id="signalement" role="tabpanel" aria-labelledby="signalement-tab">
+            <h2 class="section-title">Signalez un Site Malveillant</h2>
+            <form action="#" method="POST" id="signalementForm">
+                <div class="mb-3">
+                    <label for="siteName" class="form-label">Nom du site :</label>
+                    <input type="text" class="form-control" id="siteName" placeholder="Entrez le nom du site" required>
+                </div>
+                <div class="mb-3">
+                    <label for="siteURL" class="form-label">URL du site :</label>
+                    <input type="url" class="form-control" id="siteURL" placeholder="https://example.com" required>
+                </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Description :</label>
+                    <textarea class="form-control" id="description" rows="3" placeholder="Décrivez le problème rencontré" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-sm btn-custom">Signaler le site</button>
+            </form>
+        </div>
+
+        <!-- Onglet Mesures de Prévention -->
+        <div class="tab-pane fade" id="prevention" role="tabpanel" aria-labelledby="prevention-tab">
+            <h2 class="section-title">Mesures de Prévention</h2>
+            <div class="row">
+                <!-- Cadre 1 -->
+                <div class="col-md-3">
+                    <div class="prevention-step">
+                        <img src="dossierphotos/Best Antivirus Software Options In 2023 – Aron Govil.jpg" alt="Utiliser un antivirus">
+                        <h4>Utilisez un Antivirus</h4>
+                        <p>Assurez-vous que votre ordinateur soit équipé d'un logiciel antivirus à jour.</p>
+                    </div>
+                </div>
+                <!-- Cadre 2 -->
+                <div class="col-md-3">
+                    <div class="prevention-step">
+                        <img src="dossierphotos/liens.jpg" alt="Ne pas cliquer sur des liens suspects">
+                        <h4>Ne cliquez pas sur des liens suspects</h4>
+                        <p>Évitez de cliquer sur des liens inconnus, surtout dans les emails et messages non sollicités.</p>
+                    </div>
+                </div>
+                <!-- Cadre 3 -->
+                <div class="col-md-3">
+                    <div class="prevention-step">
+                        <img src="dossierphotos/How to Install a VPN on Your Router.jpg" alt="Utilisez un VPN">
+                        <h4>Utilisez un VPN</h4>
+                        <p>Protégez votre connexion internet en utilisant un VPN fiable lors de vos navigations.</p>
+                    </div>
+                </div>
+                <!-- Cadre 4 -->
+                <div class="col-md-3">
+                    <div class="prevention-step">
+                        <img src="dossierphotos/Pourquoi et comment bien gérer ses mises à jour _.jpg" alt="Mettez à jour vos logiciels">
+                        <h4>Gardez vos logiciels à jour</h4>
+                        <p>Assurez-vous de toujours installer les dernières mises à jour de sécurité sur vos appareils.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Section de l'image en arrière-plan sous les onglets -->
+<div class="background-section"></div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- JS pour gérer l'ajout de commentaires -->
+<script>
+    document.getElementById("submitComment1").addEventListener("click", function() {
+        var commentText = document.getElementById("newComment1").value;
+        if (commentText) {
+            var commentSection = document.querySelector(".comment-section");
+
+            var commentDiv = document.createElement("div");
+            commentDiv.classList.add("comment");
+
+            var author = document.createElement("p");
+            author.classList.add("author");
+            author.textContent = "Utilisateur anonyme :";
+
+            var comment = document.createElement("p");
+            comment.textContent = commentText;
+
+            commentDiv.appendChild(author);
+            commentDiv.appendChild(comment);
+
+            commentSection.appendChild(commentDiv);
+            document.getElementById("newComment1").value = ""; // Réinitialiser la zone de texte
+        }
+    });
+</script>
+
+</body>
+</html>
