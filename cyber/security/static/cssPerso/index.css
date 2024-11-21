@@ -1,0 +1,142 @@
+
+
+h1{
+    font-size: 50px;
+    font-weight: bold;
+    font-family: 'Times New Roman', Times, serif;
+    margin-left: 0px;
+}
+ul{
+    
+    text-decoration: none;
+    display: flex;
+    text-align: center;
+    font-size: 30px;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bold;
+    margin-left: 200px;
+    text-decoration: none;
+    transition: 0.5s;
+    
+    
+
+}
+.first{
+    background-color: rgb(205, 155, 132);
+    height: 100px;
+    font-size: 40px;
+    font-weight: bold;
+    font-family: 'Times New Roman', Times, serif;
+    padding-left: 100px;
+    letter-spacing: 6px;
+    box-shadow: 5px 5px 6px;
+}
+
+#entete{
+    margin-top: 0px;
+    padding-left: 100px;
+    height: 50px;
+    background-color: aqua;
+    
+}
+.container-fluid{
+    height: 900px;
+    background-color: hsl(180, 31%, 64%);
+}
+
+
+li{
+    list-style-type: none;
+    text-decoration: none;
+    
+}
+ul a{
+    margin: 20px  35px;
+    text-decoration: none;
+    transition: 0.5s;
+    text-decoration: none;
+
+}
+ul a:hover{
+    
+    color:red;
+    text-decoration: none;
+}
+.col-lg-4{
+    text-align: center;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    justify-items: center;
+    background-color: #edd8ce;
+    float: left;
+    font-size: 20px;
+    font-weight: bold;
+    font-family: 'Times New Roman', Times, serif;
+    
+    height: 100px;
+}
+footer{
+    bottom: 0;
+    margin-bottom: 0px;
+    width: 100%;
+    
+}
+body{
+    margin: 0px;
+    padding: 0px;
+}
+body{
+    background-color: #9cd5d5;
+}
+.block1{
+    width: 900px;
+    height: 200px;
+    font-weight: bold;
+    font-size: 30px;
+    
+    box-shadow: 6px 6px 10px #372c2c;
+    text-align: center;
+    letter-spacing: 2px;
+    
+    margin-left: 300px;
+    color: #372c2c;
+    background-color: #f9f9f5;
+    top: 50px;
+    border-bottom-left-radius: 10px solid black;
+    border-bottom-left-radius: 10px solid black;
+    border: 2px solid red;
+}
+.test2{
+    text-align: center;
+    margin-top: 75px;
+    font-size: 40px;
+    font-weight: bold;
+}
+form{
+    margin-left: 400px;
+    width: 400px;
+}
+.form-group{
+    width: 800px;
+    border: 3px solid white;
+}
+form div p{
+    width: 600px;
+    border: 2px solid yellow;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+    margin-left: 200px;
+}
+form div p input:first-child{
+    width: 600px;
+    height: 75px;
+    background-color: aqua;
+}
+.btn{
+    width: 200px;
+    font-size: 22px;
+    font-weight: bold;
+    margin-left: 275px;
+}
