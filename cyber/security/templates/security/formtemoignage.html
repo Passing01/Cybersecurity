@@ -1,0 +1,24 @@
+ <!--{% extends "Security/base.html" %}-->
+ 
+ <!--{% block  content %}-->
+
+ <!DOCTYPE html>
+ <html lang="en">
+ {% load static%}
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="stylesheet" href="{% static 'css/bootstrap.css'%}">
+     <link rel="stylesheet" href="{% static 'cssPerso/index.css' %}">
+     <title>Security -UP</title>
+ </head>
+
+<body>
+    <form method="POST" action="">
+        {% csrf_token %}
+        {{forms.pubDate}}
+        <br> <input type="button" value="Valider" class="btn btn-primary">
+    </form>
+</body>
+ 
+ <!--{% endblock  %}-->

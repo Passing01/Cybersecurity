@@ -1,0 +1,48 @@
+
+<!DOCTYPE html>
+<html lang="en">
+{% load static%}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css'%}">
+    <link rel="stylesheet" href="{% static 'cssPerso/index.css' %}">
+    <title>Security -UP</title>
+</head>
+<body>
+    <div class="row first">
+        <div class="col-lg-12">Solution efficace pour votre securite en ligne</div>
+    </div>
+<div class="row"  id="entete">
+    <div class="col-lg-5"><h1>Security-UP</h1></div>
+    <div class="col-lg-7">
+    <ul class="menu">
+        <li><a href="">Accueil</a></li>
+        <li><a href="">Tester</a></li>
+            <ul class="sous-menu">
+                <li><a href="">L´adresse d´un site web</a></li>
+                <li><a href="">Emails</a></li>
+                <li><a href="">Fichiers</a></li>
+                <li><a href="">Decouvrir les sites suspects</a></li>
+            </ul>
+        <li><a href="">A propos</a></li>
+    </ul>
+</div>
+</div>
+
+{% block title %}
+{% endblock%}
+
+{% block content%}
+
+
+{% endblock%}
+
+<footer>
+    <div class="row">
+        <div class="col-lg-4">Security-UP <br> Proteger les systemes d informations </div>
+        <div class="col-lg-4">Tous droits reserves <br> Ouaga 04 <br>3303 </div>
+        <div class="col-lg-4">Pour votre securite numerique <br><b>Security-UP</b><br>est fait pour vous</div>
+    </div>
+</footer>
+

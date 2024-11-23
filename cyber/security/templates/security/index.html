@@ -15,9 +15,15 @@
     <div class="row"  id="entete">
         <div class="col-lg-5"><h1>Security-UP</h1></div>
         <div class="col-lg-7">
-        <ul>
+        <ul class="menu">
             <li><a href="">Accueil</a></li>
             <li><a href="">Tester</a></li>
+                <ul class="sous-menu">
+                    <li><a href="">L´adresse d´un site web</a></li>
+                    <li><a href="">Emails</a></li>
+                    <li><a href="">Fichiers</a></li>
+                    <li><a href="">Decouvrir les sites suspects</a></li>
+                </ul>
             <li><a href="">A propos</a></li>
         </ul>
     </div>
@@ -35,7 +41,7 @@
             {{form.as_p}}
             </div>
             <input type="Submit" value="Verifier" class="btn btn-primary"></input>
-            <p>Vous avez entrer :<b>{{lien}}</b></p> en cours d´analyse...
+            <p>Vous avez entrer :<b>{{link}}</b></p> en cours d´analyse...
         </form>
 </div>
 
