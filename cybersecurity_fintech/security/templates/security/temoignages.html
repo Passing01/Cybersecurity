@@ -1,0 +1,332 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signalement des Sites Malveillants</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- CSS personnalisé -->
+    <style>
+        body {
+            background-color: #f3f3f3;
+            font-family: 'Poppins', sans-serif;
+        }
+        .navbar {
+            background-color: #1e293b;
+        }
+        .navbar-brand {
+            color: #f8fafc;
+            font-size: 1.8rem;
+        }
+        .navbar-nav .nav-link {
+            color: #cbd5e1;
+            margin-right: 20px;
+        }
+        .navbar-nav .nav-link:hover {
+            color: #ffffff;
+        }
+        .hero {
+            background: linear-gradient(135deg, #007bff, #6610f2);
+            color: #ffffff;
+            padding: 50px 20px;
+            text-align: center;
+        }
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+        }
+        .hero p {
+            font-size: 1.2rem;
+        }
+        .section-title {
+            text-align: center;
+            margin: 30px 0;
+            color: #343a40;
+        }
+        .card {
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        .btn-custom {
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 20px;
+            padding: 10px 20px;
+            font-weight: bold;
+        }
+        .btn-custom:hover {
+            background-color: #0056b3;
+        }
+        .tab-content {
+            margin-top: 20px;
+        }
+        .comment-section {
+            margin-top: 20px;
+        }
+        .comment {
+            background-color: #f8f9fa;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+        .comment .author {
+            font-weight: bold;
+        }
+        .comment-form {
+            margin-top: 10px;
+        }
+        /* Image de fond sous l'entête, mais au-dessous du texte des onglets */
+        .background-section {
+            background-image: url('https://example.com/votre-image.jpg'); /* Remplacez l'URL par le chemin de votre image */
+            background-size: cover;
+            background-position: center;
+            height: 400px; /* Ajustez la hauteur selon vos préférences */
+            margin-top: 40px; /* Espacement sous les onglets */
+        }
+        /* Style des cadres dans l'onglet Mesures de Prévention */
+        .prevention-step {
+            background-color: #ffffff;
+            border: 2px solid #007bff;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .prevention-step img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+        .prevention-step h4 {
+            color: #007bff;
+            margin-bottom: 10px;
+        }
+        .prevention-step p {
+            color: #555;
+        }
+        .more-info {
+            display: none;
+            margin-top: 10px;
+            color: #555;
+        }
+        .more-info p {
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">CyberSecure</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="http://127.0.0.1:8000/">Accueil</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+    <h1>Protégez-vous contre les cybermenaces</h1>
+    <p>Partagez vos expériences, signalez des sites malveillants et apprenez les bonnes pratiques de cybersécurité.</p>
+</section>
+
+<!-- Onglets -->
+<div class="container mt-5">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <!--<li class="nav-item" role="presentation">
+            <button class="nav-link active" id="details-tab" data-bs-toggle="tab" data-bs-target="#details" type="button" role="tab" aria-controls="details" aria-selected="true">
+                Détails des Sites Signalés
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="signalement-tab" data-bs-toggle="tab" data-bs-target="#signalement" type="button" role="tab" aria-controls="signalement" aria-selected="false">
+                Signalez un Site Malveillant
+            </button>
+        </li>-->
+        <li class="nav-item" role="presentation">
+            <a class="nav-link active" href="{% url 'liste_temoignages' %}" role="tab" aria-selected="true">
+                Détails des Sites Signalés
+            </a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link" href="{% url 'soumettre_temoignage' %}" role="tab" aria-selected="false">
+                Signalez un Site Malveillant
+            </a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="prevention-tab" data-bs-toggle="tab" data-bs-target="#prevention" type="button" role="tab" aria-controls="prevention" aria-selected="false">
+                Mesures de Prévention
+            </button>
+        </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="details" role="tabpanel" aria-labelledby="details-tab">
+            <h2 class="section-title">Détails des Sites Signalés</h2>
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-header bg-danger text-white">example.com</div>
+                        <div class="card-body">
+                            <p><strong>URL :</strong> <a href="https://example.com" target="_blank">example.com</a></p>
+                            <p><strong>Description :</strong> Phishing détecté via des emails frauduleux.</p>
+                            <p><strong>Date :</strong> 21/11/2024</p>
+                        </div>
+                    </div>
+
+                    <div class="comment-section">
+                        <h5>Commentaires :</h5>
+                        <div class="comment">
+                            <p class="author">Utilisateur 1 :</p>
+                            <p>Ce site est clairement malveillant, je vous conseille de l'éviter.</p>
+                        </div>
+                        <div class="comment">
+                            <p class="author">Utilisateur 2 :</p>
+                            <p>Merci pour l'alerte, je vais éviter ce site.</p>
+                        </div>
+
+                        <h5>Ajouter un commentaire :</h5>
+                        <form class="comment-form" id="commentForm1">
+                            <div class="mb-3">
+                                <textarea class="form-control" rows="3" id="newComment1" placeholder="Écrivez un commentaire"></textarea>
+                            </div>
+                            <button type="button" id="submitComment1" class="btn btn-sm btn-custom">Soumettre</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-pane fade" id="signalement" role="tabpanel" aria-labelledby="signalement-tab">
+            <h2 class="section-title">Signalez un Site Malveillant</h2>
+            <form action="#" method="POST" id="signalementForm">
+                <div class="mb-3">
+                    <label for="siteName" class="form-label">Nom du site :</label>
+                    <input type="text" class="form-control" id="siteName" placeholder="Entrez le nom du site" required>
+                </div>
+                <div class="mb-3">
+                    <label for="siteURL" class="form-label">URL du site :</label>
+                    <input type="url" class="form-control" id="siteURL" placeholder="https://example.com" required>
+                </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Description :</label>
+                    <textarea class="form-control" id="description" rows="3" placeholder="Décrivez pourquoi vous signalez ce site" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-custom">Signaler le site</button>
+            </form>
+        </div>
+
+        <!-- Onglet Mesures de Prévention -->
+        <div class="tab-pane fade" id="prevention" role="tabpanel" aria-labelledby="prevention-tab">
+            <h2 class="section-title">Mesures de Prévention</h2>
+            <div class="row">
+                <!-- Étape 0 -->
+                <div class="col-md-4">
+                    <div class="prevention-step">
+                        <img src="{% static 'security/images/update.jpeg' %}" alt="Étape VPN">
+                        <h4>Utilisez un VPN</h4>
+                        <p>Protégez votre connexion internet en utilisant un VPN fiable lors de vos navigations.</p>
+                        <button class="btn btn-sm btn-custom" onclick="toggleMoreInfo(4)">En savoir plus</button>
+                        <div class="more-info" id="moreInfo4">
+                            <p>Un VPN (Virtual Private Network) vous permet de chiffrer votre connexion Internet, ce qui empêche les tiers d'espionner vos activités en ligne. Il masque également votre adresse IP, vous rendant anonyme et vous permettant de contourner les restrictions géographiques sur certains contenus en ligne.</p>
+                            <p>Pour une sécurité optimale, choisissez un VPN réputé qui ne garde pas de journaux de connexion et qui propose des protocoles de chiffrement robustes. Assurez-vous également que votre VPN est compatible avec les plateformes que vous utilisez (PC, smartphone, etc.).</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Étape 1 -->
+                <div class="col-md-4">
+                    <div class="prevention-step">
+                        <img src="{% static 'security/images/photos1.jpeg' %}" alt="Étape 1">
+                        <h4>Utilisez un antivirus à jour</h4>
+                        <p>Assurez-vous que votre antivirus est à jour pour détecter les menaces de manière proactive.</p>
+                        <button class="btn btn-sm btn-custom" onclick="toggleMoreInfo(1)">En savoir plus</button>
+                        <div class="more-info" id="moreInfo1">
+                            <p>Un antivirus à jour est essentiel pour vous protéger contre les menaces informatiques les plus récentes. Les cybercriminels développent constamment de nouveaux virus et malwares pour exploiter les failles de sécurité. Un antivirus qui n'est pas mis à jour régulièrement peut ne pas être en mesure de détecter ces nouvelles menaces, ce qui vous expose à des risques inutiles.</p>
+                            <p>Voici quelques conseils pour maintenir votre antivirus à jour :
+                                <ul>
+                                    <li>Vérifiez que les mises à jour sont activées afin que les définitions de virus se mettent à jour automatiquement.</li>
+                                    <li>Planifiez des analyses automatiques régulières de votre système pour détecter toute activité suspecte.</li>
+                                    <li>Choisissez un antivirus réputé qui inclut des fonctionnalités telles que la protection en temps réel, le filtrage des sites Web dangereux, et l'analyse des pièces jointes dans les e-mails.</li>
+                                    <li>Ne vous contentez pas de la version gratuite, si possible optez pour une version payante avec un support technique et des fonctionnalités avancées.</li>
+                                </ul>
+                            </p>
+                            <p>Assurez-vous également que votre antivirus ne soit pas désactivé ou obsolète suite à des erreurs de configuration. Cela peut rendre votre appareil vulnérable aux attaques.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Étape 2 -->
+<div class="col-md-4">
+    <div class="prevention-step">
+        <img src="{% static 'security/images/liens.jpeg' %}" alt="Étape 2">
+        <h4>Activez l'authentification à deux facteurs</h4>
+        <p>Protégez vos comptes en ligne en activant l'authentification à deux facteurs pour renforcer la sécurité.</p>
+        <button class="btn btn-sm btn-custom" onclick="toggleMoreInfo(2)">En savoir plus</button>
+        <div class="more-info" id="moreInfo2">
+            <p>L'authentification à deux facteurs (2FA) est une méthode de sécurité qui protège vos comptes en ligne en exigeant deux formes de vérification : quelque chose que vous connaissez (votre mot de passe) et quelque chose que vous possédez (un code envoyé à votre téléphone ou généré par une application d'authentification).</p>
+            <p>Voici pourquoi l'activation du 2FA est importante :
+                <ul>
+                    <li>Renforce la sécurité de vos comptes en ligne, même si votre mot de passe est compromis.</li>
+                    <li>Empêche l'accès non autorisé aux comptes, car l'attaquant aurait besoin de votre mot de passe et de votre téléphone ou application d'authentification.</li>
+                    <li>Le 2FA est souvent utilisé par les services en ligne populaires comme les banques, les réseaux sociaux et les fournisseurs de messagerie électronique.</li>
+                </ul>
+            </p>
+            <p>Assurez-vous que votre 2FA utilise des méthodes sécurisées comme des applications d'authentification (par exemple, Google Authenticator, Authy) au lieu des codes envoyés par SMS, qui peuvent être interceptés.</p>
+        </div>
+    </div>
+</div>
+
+                <!-- Étape 3 -->
+<div class="col-md-4">
+    <div class="prevention-step">
+        <img src="{% static 'security/images/savedata.jpeg' %}" alt="Étape 3">
+        <h4>Évitez les liens suspects</h4>
+        <p>Ne cliquez jamais sur des liens douteux reçus par email ou message instantané.</p>
+        <button class="btn btn-sm btn-custom" onclick="toggleMoreInfo(3)">En savoir plus</button>
+        <div class="more-info" id="moreInfo3">
+            <p>Les liens suspects peuvent diriger vers des sites de phishing ou télécharger des logiciels malveillants. Ces liens sont souvent dissimulés dans des emails ou des messages instantanés. En cliquant sur ces liens, vous pourriez accidentellement donner vos informations personnelles ou installer un virus sur votre appareil.</p>
+            <p>Voici quelques conseils pour éviter de cliquer sur des liens suspects :
+                <ul>
+                    <li>Vérifiez toujours l'URL avant de cliquer. Si l'URL semble étrange ou ne correspond pas au site web que vous souhaitez visiter, ne cliquez pas.</li>
+                    <li>Ne cliquez pas sur des liens contenus dans des emails ou des messages de sources inconnues ou non sollicitées.</li>
+                    <li>Utilisez des outils comme des antivirus ou des extensions de navigateur pour détecter et bloquer les sites de phishing connus.</li>
+                    <li>Si vous recevez un message avec un lien suspect d'une source que vous connaissez, contactez la personne par un autre moyen pour confirmer l'authenticité du lien.</li>
+                </ul>
+            </p>
+            <p>En cas de doute, tapez l'URL manuellement dans la barre d'adresse de votre navigateur pour accéder à la page web souhaitée.</p>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Scripts JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+
+<script>
+    function toggleMoreInfo(step) {
+        var moreInfo = document.getElementById('moreInfo' + step);
+        if (moreInfo.style.display === "none" || moreInfo.style.display === "") {
+            moreInfo.style.display = "block";
+        } else {
+            moreInfo.style.display = "none";
+        }
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Surveillance des Emails</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+
+    .navbar {
+      background-color: #007bff;
+    }
+
+    .navbar-brand {
+      color: #fff !important;
+      font-size: 1.5em;
+      font-weight: bold;
+    }
+
+    .table-hover tbody tr:hover {
+      background-color: rgba(0, 123, 255, 0.1);
+    }
+
+    .btn-analyze {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-analyze:hover {
+      background-color: #0056b3;
+    }
+
+    .text-danger {
+      font-weight: bold;
+      color: #dc3545 !important;
+    }
+
+    .text-warning {
+      font-weight: bold;
+      color: #ffc107 !important;
+    }
+
+    .text-success {
+      font-weight: bold;
+      color: #28a745 !important;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Surveillance des Emails</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="tableau-de-bord.html">Tableau de Bord</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="#">Surveillance des Emails</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="securisation-donnees.html">Sécurisation des Données</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Titre -->
+  <div class="container my-4">
+    <h1 class="text-center text-primary">Surveillance des Emails</h1>
+    <p class="text-center">Analysez les emails pour détecter des comportements suspects ou des tentatives de phishing.</p>
+  </div>
+
+  <!-- Tableau de Surveillance -->
+  <div class="container">
+    <div class="table-responsive">
+      <table class="table table-bordered table-hover">
+        <thead class="table-primary">
+          <tr>
+            <th>#</th>
+            <th>Expéditeur</th>
+            <th>Objet</th>
+            <th>Date</th>
+            <th>Statut</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="emailTable">
+          <!-- Contenu dynamique inséré ici -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white text-center py-3 mt-5">
+    <p>© 2024 Sécurisation App. Tous droits réservés.</p>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    // Simule l'API backend avec des emails
+    const mockEmails = [
+      { sender: 'hacker@example.com', subject: 'Votre compte a été compromis !', date: '2024-11-19', status: 'Suspect' },
+      { sender: 'service@banque-fictif.com', subject: 'Confirmation de transaction bancaire', date: '2024-11-18', status: 'À vérifier' },
+      { sender: 'newsletter@legitime.com', subject: 'Offres exclusives du mois', date: '2024-11-18', status: 'Sûr' }
+    ];
+
+    // Ajoute les emails dans le tableau
+    function updateEmailTable(emails) {
+      const table = document.getElementById('emailTable');
+      table.innerHTML = ''; // Réinitialise le tableau
+
+      emails.forEach((email, index) => {
+        const row = `
+          <tr>
+            <td>${index + 1}</td>
+            <td>${email.sender}</td>
+            <td>${email.subject}</td>
+            <td>${email.date}</td>
+            <td class="text-${email.status === 'Suspect' ? 'danger' : email.status === 'À vérifier' ? 'warning' : 'success'}">
+              ${email.status}
+            </td>
+            <td>
+              <button class="btn btn-analyze btn-sm" ${email.status === 'Sûr' ? 'disabled' : ''}>Analyser</button>
+            </td>
+          </tr>
+        `;
+        table.innerHTML += row;
+      });
+    }
+
+    // Simule une surveillance en temps réel
+    function startRealTimeMonitoring() {
+      updateEmailTable(mockEmails); // Charge initialement les emails
+
+      setInterval(() => {
+        // Simule l'ajout de nouveaux emails
+        const newEmail = {
+          sender: `random${Math.floor(Math.random() * 5)}@example.com`,
+          subject: 'Nouvel email suspect',
+          date: new Date().toISOString().slice(0, 10),
+          status: 'Suspect'
+        };
+        mockEmails.unshift(newEmail); // Ajoute un nouvel email en tête de liste
+        updateEmailTable(mockEmails); // Met à jour la table
+      }, 10000); // Rafraîchit toutes les 10 secondes
+    }
+
+    // Lance la surveillance en temps réel
+    startRealTimeMonitoring();
+  </script>
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+</body>
+
+</html>

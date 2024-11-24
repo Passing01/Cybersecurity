@@ -1,0 +1,13 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<h1>Liste des Témoignages</h1>
+<ul>
+    {% for temoignage in temoignages %}
+        <li>
+            <a href="{% url 'detail_temoignage' temoignage.id %}">{{ temoignage.site_web }}</a>
+            <p>{{ temoignage.description }}</p>
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}

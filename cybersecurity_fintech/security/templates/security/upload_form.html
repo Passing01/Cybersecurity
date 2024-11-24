@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sécurisation des Données</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+
+    .navbar {
+      background-color: #007bff;
+    }
+
+    .navbar-brand {
+      color: #fff !important;
+      font-size: 1.5em;
+      font-weight: bold;
+    }
+
+    .table-hover tbody tr:hover {
+      background-color: rgba(0, 123, 255, 0.1);
+    }
+
+    .btn-primary {
+      background-color: #007bff;
+      border: none;
+    }
+
+    .btn-primary:hover {
+      background-color: #0056b3;
+    }
+
+    .btn-danger {
+      background-color: #dc3545;
+      border: none;
+    }
+
+    .btn-danger:hover {
+      background-color: #c82333;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Sécurisation des Données</a>
+    </div>
+  </nav>
+
+  <!-- Titre -->
+  <div class="container my-4">
+    <h1 class="text-center text-primary">Sécurisation des Données</h1>
+    <p class="text-center">Téléchargez vos fichiers pour les sécuriser grâce au chiffrement AES-256.</p>
+  </div>
+
+  <!-- Formulaire de téléchargement -->
+  <div class="container my-4">
+    <form id="uploadForm">
+      <div class="mb-3">
+        <label for="secureFile" class="form-label">Télécharger un fichier à sécuriser</label>
+        <input type="file" class="form-control" id="secureFile" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Chiffrer et Sécuriser</button>
+    </form>
+  </div>
+
+  <!-- Liste des fichiers sécurisés -->
+  <div class="container">
+    <h2 class="text-primary">Fichiers Sécurisés</h2>
+    <div class="table-responsive">
+      <table class="table table-bordered table-hover">
+        <thead class="table-primary">
+          <tr>
+            <th>#</th>
+            <th>Nom du Fichier</th>
+            <th>Date d'Ajout</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="fileTable">
+          <!-- Les fichiers sécurisés seront ajoutés ici -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white text-center py-3 mt-5">
+    <p>© 2024 Sécurisation App. Tous droits réservés.</p>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    const fileTable = document.getElementById('fileTable');
+    const uploadForm = document.getElementById('uploadForm');
+    const files = []; // Stockage local simulé
+
+    // Générateur de clé simulé
+    function generateKey() {
+      return crypto.getRandomValues(new Uint8Array(32)); // Clé AES-256
+    }
+
+    // Simule le chiffrement avec AES
+    function encryptFile(file) {
+      const key = generateKey();
+      return {
+        encryptedName: file.name + '.enc',
+        date: new Date().toLocaleDateString(),
+        key: Array.from(key), // Clé en bytes
+      };
+    }
+
+    // Gestion du téléchargement
+    uploadForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const fileInput = document.getElementById('secureFile');
+      const file = fileInput.files[0];
+
+      if (file) {
+        const encryptedFile = encryptFile(file);
+
+        // Ajout à la liste des fichiers sécurisés
+        files.push({
+          name: encryptedFile.encryptedName,
+          date: encryptedFile.date,
+          key: encryptedFile.key,
+        });
+
+        updateFileTable();
+        fileInput.value = ''; // Réinitialise le champ
+      } else {
+        alert("Veuillez sélectionner un fichier.");
+      }
+    });
+
+    <table class="table table-bordered table-hover">
+        <thead class="table-primary">
+          <tr>
+            <th>#</th>
+            <th>Nom du Fichier</th>
+            <th>Date d'Ajout</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for file in files %}
+          <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ file.name }}</td>
+            <td>{{ file.upload_date|date:"d/m/Y H:i" }}</td>
+            <td>
+              <a href="{% url 'decrypt_file' file.id %}" class="btn btn-primary btn-sm">Déchiffrer</a>
+              <a href="{% url 'delete_file' file.id %}" class="btn btn-danger btn-sm">Supprimer</a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      
+
+    // Suppression d'un fichier
+    function deleteFile(index) {
+      files.splice(index, 1);
+      updateFileTable();
+    }
+
+    // Déchiffrement simulé
+    function decryptFile(index) {
+      const file = files[index];
+      alert(`Fichier déchiffré : ${file.name}\nClé : ${file.key.join(', ')}`);
+    }
+  </script>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+</body>
+
+</html>
